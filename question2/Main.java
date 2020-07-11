@@ -31,19 +31,21 @@ public class Main {
         }
     }
 
-    /** Retourne dans une String, un arbre en XML, utilisÃ©e en question4. */
+    /** Retourne dans une String, un arbre en XML, utilisée en question4. */
     public static String arbreXML(Cotisant c) throws Exception{
         ByteArrayOutputStream baos = null;
         String result = new String();
         Element racine = c.accepter(new VisiteurToXML());
-        Document document = new Document(racine);        
-        XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
-        try{
-            baos = new ByteArrayOutputStream();
-            out.output(document, baos);
-            result = baos.toString();
-        }finally{
-            baos.close();
+        if(racine != null){
+            Document document = new Document(racine);        
+            XMLOutputter out = new XMLOutputter(Format.getPrettyFormat());
+            try{
+                baos = new ByteArrayOutputStream();
+                out.output(document, baos);
+                result = baos.toString();
+            }finally{
+                baos.close();
+            }
         }
         return result;
     }

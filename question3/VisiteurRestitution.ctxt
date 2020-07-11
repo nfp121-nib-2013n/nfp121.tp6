@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=VisiteurRestitution
+comment0.text=\r\n\ VisiteurRestitution,\ un\ second\ visiteur\ pour\ la\ restitution\ \r\n\ du\ composite.\r\n
+comment1.params=state
+comment1.target=VisiteurRestitution(org.jdom.Element)
+comment2.params=cpt
+comment2.target=question1.Cotisant\ visite(question1.Contributeur)
+comment3.params=grp
+comment3.target=question1.Cotisant\ visite(question1.GroupeDeContributeurs)
+comment4.params=cpt\ state
+comment4.target=void\ updateState(question1.Contributeur,\ org.jdom.Element)
+comment5.params=grp\ state
+comment5.target=void\ updateState(question1.GroupeDeContributeurs,\ org.jdom.Element)
+numComments=6

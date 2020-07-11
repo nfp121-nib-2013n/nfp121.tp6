@@ -328,7 +328,6 @@ public class TestsCotisant extends junit.framework.TestCase{
         }
     }
 
-
     public void testVisiteurSurUnGroupe(){
         try{
             GroupeDeContributeurs g = new GroupeDeContributeurs("g");
@@ -445,4 +444,3 @@ public class TestsCotisant extends junit.framework.TestCase{
         }
     }
 }
-

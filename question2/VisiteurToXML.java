@@ -11,6 +11,8 @@ public class VisiteurToXML implements Visiteur<Element> {
     public VisiteurToXML() {}
 
     public Element visite(Contributeur c){
+        if(c == null)
+            return null;
         Element elt = new Element("contributeur");
         elt.setAttribute("nom", c.nom());
         elt.setAttribute("solde", Integer.toString(c.solde()));
@@ -18,6 +20,8 @@ public class VisiteurToXML implements Visiteur<Element> {
     }
 
     public Element visite(GroupeDeContributeurs g) {
+        if(g == null)
+            return null;
         Element elt = new Element("groupe");
         elt.setAttribute("nom", g.nom());
         elt.setAttribute("solde", Integer.toString(g.solde()));

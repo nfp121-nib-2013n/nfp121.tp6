@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=VisiteurSauvegarde
+comment0.text=\r\n\ VisiteurSauvegarde,\ un\ premier\ visiteur\ pour\ la\ sauvegarde.\r\n\ L'arbre\ XML\ du\ cotisant\ sera\ sauvegard\u00E9e,\ en\ utilisant\ le\ \r\n\ visiteur\ VisiteurToXML,\ pour\ une\ restitution\ ult\u00E9rieure.\r\n
+comment1.params=cpt
+comment1.target=org.jdom.Element\ visite(question1.Contributeur)
+comment2.params=grp
+comment2.target=org.jdom.Element\ visite(question1.GroupeDeContributeurs)
+numComments=3

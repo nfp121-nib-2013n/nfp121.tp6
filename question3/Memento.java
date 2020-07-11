@@ -1,20 +1,27 @@
 package question3;
 
 import question1.*;
+import question2.*;
 import java.util.*;
+import org.jdom.*;
 
 public class Memento {
-     // Note : Un usage du patron Memento, 
-     //        d’un premier visiteur pour la sauvegarde et 
-     //        d’un second pour la restitution du composite, 
-     //        représentent une solution possible. 
-     
-     public Memento(Cotisant c) {
-       // sauvegarde
-     }
 
-     public void setState(Cotisant c) {
-       // restitution
-     }
-    
+    private Element state;
+
+    public Memento(Cotisant c) {
+        // Sauvegarde
+        if(c != null){
+            state = c.accepter(new VisiteurSauvegarde());
+        }
+
     }
+
+    public void setState(Cotisant c) {
+        // Restitution
+        if(c != null){
+            c.accepter(new VisiteurRestitution(state));
+        }
+    }
+
+}

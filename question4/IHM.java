@@ -16,8 +16,8 @@ import java.io.ByteArrayOutputStream;
 public class IHM extends JFrame {
 
     private JTextArea resultat = new JTextArea("", 7,60);
-    private JButton debiter = new JButton("dÃ©biter");
-    private JButton crediter = new JButton("crÃ©diter");
+    private JButton debiter = new JButton("débiter");
+    private JButton crediter = new JButton("créditer");
     private JTextField somme = new JTextField(4);
 
     private GroupeDeContributeurs g;
@@ -44,16 +44,44 @@ public class IHM extends JFrame {
         g1.ajouter(new Contributeur("g1_b1",200));
         g.ajouter(g1);
 
-        try{
-            resultat.setText(Main.arbreXML(g)); //actualiser();
-        }catch(Exception e){}
+        actualiser();
 
-        debiter.addActionListener(null/* a completer */);
-        crediter.addActionListener(null/* a completer */);
+        ButtonsListener buttonsListener = new ButtonsListener();
+        debiter.addActionListener(buttonsListener);
+        crediter.addActionListener(buttonsListener);
 
-            
         this.pack();
         this.setVisible(true);
+    }
+
+    public void actualiser(){
+        try{
+            resultat.setText(Main.arbreXML(g));
+        }catch(Exception e){}
+    }
+
+    private class ButtonsListener implements ActionListener{
+        public void actionPerformed(ActionEvent ae){
+            Object event = ae.getSource();
+            String valeurSomme = somme.getText();
+
+            if(event == debiter){
+                try{
+                    // Débiter en utilisant les transactions !
+                    AbstractTransaction trans = new TransactionDebit(g);
+                    trans.debit(Integer.parseInt(valeurSomme));
+                } catch(Exception exc){
+                    System.out.println(exc.getMessage());
+                }
+            } else if(event == crediter){
+                try{
+                    g.credit(Integer.parseInt(valeurSomme));
+                } catch(Exception exc){
+                    System.out.println(exc.getMessage());
+                }
+            }
+            actualiser();
+        }
     }
 
     public static void main() {

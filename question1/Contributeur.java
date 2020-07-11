@@ -1,51 +1,65 @@
 package question1;
 
-
 public class Contributeur extends Cotisant{
-  private int solde;
-  
-  public Contributeur(String nom, int somme){
-    super(nom);
-    // a completer
-  }
-  
-  public int solde(){
-    return this.solde;
-  }
-  
-  public int nombreDeCotisants(){
-    return 1;
-  }
-	public void debit(int somme) throws SoldeDebiteurException{
-	  // a completer
-	}
-	
-	/**
-	 * throws RuntimeException new RuntimeException("nombre n√©gatif !!!");
-	 */
-  public  void credit(int somme){
-	  // a completer
-	}
-	
-	/**
-	 * throws RuntimeException new RuntimeException("nombre n√©gatif !!!");
-	 */
-  public void affecterSolde(int somme){
-    // if(somme <0) throw new RuntimeException("nombre n√©gatif !!!");
-    try{
-      debit(solde()); credit(somme);// mode √©l√©gant ... 
-    }catch(SoldeDebiteurException sde){ 
-      // exception peu probable
-      this.solde = somme; // mode efficace ...
+    private int solde;
+
+    /**
+     * Note:
+     * RuntimeException est une 'Unchecked exceptions' qui peut 
+     * ne pas Ítre dÈclarÈ dans 'throws'.
+     * Mais l'utilisation de 'throws' ici va permettre de tenir 
+     * l'exception dans un 'catch' afin d'afficher un message d'erreur
+     * comprÈhensible.
+     */
+    
+    public Contributeur(String nom, int somme) throws RuntimeException{
+        super(nom);
+        if(somme < 0)
+            throw new RuntimeException ("La somme allouÈe lors de la crÈation ne peut Ítre nÈgative");
+        this.solde = somme;
     }
-  }
-  
-  public <T> T accepter(Visiteur<T> visiteur){
-    return visiteur.visite(this);
-  }
-  
-  public String toString(){
-    return "<Contributeur : " + nom + "," + solde + ">";
-  }
+
+    public int solde(){
+        return this.solde;
+    }
+
+    public int nombreDeCotisants(){
+        return 1;
+    }
+
+    public void debit(int somme) throws RuntimeException,SoldeDebiteurException{
+        if(somme < 0)
+            throw new RuntimeException("La somme dÈbitÈe ne peut Ítre nÈgative");
+        if(somme > solde)
+            throw new SoldeDebiteurException("DÈbit inopÈrant, le solde est insuffisant");
+        solde -= somme;
+    }
+
+    public  void credit(int somme) throws RuntimeException{
+        if(somme < 0)
+            throw new RuntimeException("La somme crÈditÈe ne peut Ítre nÈgative");
+        solde += somme;
+    }
+
+    public void affecterSolde(int somme) throws RuntimeException{
+        if(somme < 0) 
+            throw new RuntimeException("La somme ne peut Ítre nÈgative");
+        try{
+            debit(solde()); credit(somme);// mode ÈlÈgant ... 
+        }catch(SoldeDebiteurException sde){ 
+            // exception peu probable
+            this.solde = somme; // mode efficace ...
+        }
+    }
+
+    public <T> T accepter(Visiteur<T> visiteur){
+        if(visiteur == null)
+            return null;
+        return visiteur.visite(this);
+    }
+
+    public String toString(){
+        return "<Contributeur : " + nom + "," + solde + ">";
+    }
 
 }
